@@ -35,11 +35,10 @@ const port = process.env.PORT || 8180;
 //   // timezone: 'utc',
 // });
 const db = mysql.createConnection({
-  host:process.env.DB_HOST,
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database:  process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
+  host:process.env.DB_HOST || 'freemarkate.com',
+  user: process.env.DB_USERNAME || 'u840548398_gunmarkte',
+  password: process.env.DB_PASSWORD || 'Gunmarkte775227593',
+  database:  process.env.DB_DATABASE || 'u840548398_gunmarkte',
   timezone: 'utc',
 });
 // const db = mysql.createConnection({
@@ -1456,8 +1455,15 @@ io.on('connection', (Socket) => {
 
 
 
-app.listen(port, () => {
-
+server.listen(port, () => {
+  const user = "SELECT * FROM userscont "
+  db.query(user, (err, result) => {
+    if (result) {
+      console.log(result)
+    } else {
+      console.log(err)
+    }
+  });
   // console.log(http.g);
 });
 
