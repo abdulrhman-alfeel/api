@@ -52,7 +52,8 @@ const db = mysql.createConnection({
 // });
 
 app.use(cookieparser());
-app(cors());
+app.use(cors());
+// app.use(async()=>{cors()});
 app.use(express.json());
 //app.use(fileUpload());
 
@@ -308,6 +309,7 @@ app.get('/api/usersviewfrind', isAuthenticated, (req, res) => {
     }
   });
 });
+
 app.get('/api/viewfrindthusermy', isAuthenticated, (req, res) => {
   const userSession = req.session.user;
   if (!userSession) {
